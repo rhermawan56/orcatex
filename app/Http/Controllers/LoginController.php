@@ -29,7 +29,7 @@ class LoginController extends Controller
         if (Auth::user()) {
             dd('ok');
         } else {
-            return redirect('user');
+            return redirect('useraccount');
         }
     }
 
@@ -56,7 +56,7 @@ class LoginController extends Controller
                 ->where('ms.user_id', Auth::user()->id)
                 ->get();
         } else {
-            return redirect('user');
+            return redirect('useraccount');
         }
     }
 
@@ -67,13 +67,12 @@ class LoginController extends Controller
             $this->role = $data->role->role;
             $this->level = $data->userlevel->level;
         } else {
-            return redirect('user');
+            return redirect('useraccount');
         }
     }
 
     public function index()
     {
-        // dd(bcrypt('123456'));
         return view('login.login', [
             'title' => 'User Account'
         ]);
@@ -105,7 +104,7 @@ class LoginController extends Controller
                 )
             ));
         } else {
-            return redirect('user');
+            return redirect('useraccount');
         }
     }
 
@@ -130,7 +129,7 @@ class LoginController extends Controller
                 )
             ));
         } else {
-            return redirect('user');
+            return redirect('useraccount');
         }
     }
 
@@ -197,7 +196,7 @@ class LoginController extends Controller
             )
         ]);
         } else {
-            return redirect('user');
+            return redirect('useraccount');
         }
     }
 

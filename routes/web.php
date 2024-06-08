@@ -20,7 +20,7 @@ use Illuminate\Support\Facades\Route;
 // });
 
 // User Controller
-Route::resource('user', LoginController::class);
+Route::resource('useraccount', LoginController::class);
 Route::GET('/orca/users/useraccount', [LoginController::class, 'useraccount']);
 // End User Controller
 

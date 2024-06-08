@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Menutransaction;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\URL;
 use PharIo\Manifest\Author;
 
 class MainController extends Controller
@@ -54,7 +55,7 @@ class MainController extends Controller
                 ->where('ms.user_id', Auth::user()->id)
                 ->get();
         } else {
-            return redirect('user');
+            return redirect('useraccount');
         }
     }
 
@@ -77,7 +78,7 @@ class MainController extends Controller
                 'submenu' => $this->submenu
             ));
         } else {
-            return redirect('user');
+            return redirect('useraccount');
         }
     }
 
