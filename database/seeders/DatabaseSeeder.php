@@ -106,13 +106,13 @@ class DatabaseSeeder extends Seeder
         Submenu::create([
             'menu_id' => '1',
             'submenu' => 'User Account',
-            'link' => "/orca/users/useraccount",
+            'link' => "/orca/useraccount",
             'path' => 'useraccount'
         ]);
         Submenu::create([
             'menu_id' => '1',
             'submenu' => 'User Menu',
-            'link' => '/orca/users/usermenu',
+            'link' => '/orca/usermenu',
             'path' => 'usermenu'
         ]);
         Menutransaction::create([

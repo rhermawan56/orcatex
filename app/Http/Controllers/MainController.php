@@ -19,16 +19,14 @@ class MainController extends Controller
     protected $menucategories, $menu, $submenu, $role, $level;
 
     protected function debuging($parameter) {
-        $data = 'aqew cekkkkkk';
-        $news = 'news';
-        dd($data);
+        dd($parameter);
     }
 
     protected function loginactivity() {
         if (Auth::user()) {
             dd('ok');
         } else {
-            return redirect('user');
+            return redirect('orca/login');
         }
     }
     
@@ -54,7 +52,7 @@ class MainController extends Controller
                 ->where('ms.user_id', Auth::user()->id)
                 ->get();
         } else {
-            return redirect('user');
+            return redirect('orca/login');
         }
     }
 
@@ -77,7 +75,7 @@ class MainController extends Controller
                 'submenu' => $this->submenu
             ));
         } else {
-            return redirect('user');
+            return redirect('orca/login');
         }
     }
 

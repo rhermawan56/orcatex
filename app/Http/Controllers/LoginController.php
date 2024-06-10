@@ -29,7 +29,7 @@ class LoginController extends Controller
         if (Auth::user()) {
             dd('ok');
         } else {
-            return redirect('user');
+            return redirect('orca/login');
         }
     }
 
@@ -56,7 +56,7 @@ class LoginController extends Controller
                 ->where('ms.user_id', Auth::user()->id)
                 ->get();
         } else {
-            return redirect('user');
+            return redirect('orca/login');
         }
     }
 
@@ -67,7 +67,7 @@ class LoginController extends Controller
             $this->role = $data->role->role;
             $this->level = $data->userlevel->level;
         } else {
-            return redirect('user');
+            return redirect('orca/login');
         }
     }
 
@@ -105,7 +105,7 @@ class LoginController extends Controller
                 )
             ));
         } else {
-            return redirect('user');
+            return redirect('orca/login');
         }
     }
 
@@ -130,7 +130,7 @@ class LoginController extends Controller
                 )
             ));
         } else {
-            return redirect('user');
+            return redirect('orca/login');
         }
     }
 
@@ -155,7 +155,7 @@ class LoginController extends Controller
 
         if (Auth::attempt($data)) {
             $request->session()->regenerate();
-            return redirect()->intended('dashboard');
+            return redirect()->intended('/orca/main');
         }
 
         return back()->withErrors([
@@ -197,7 +197,7 @@ class LoginController extends Controller
             )
         ]);
         } else {
-            return redirect('user');
+            return redirect('orca/login');
         }
     }
 
