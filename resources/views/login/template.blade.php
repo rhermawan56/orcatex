@@ -4,15 +4,15 @@
 		<title>@yield('title')</title>
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		<meta charset="utf-8" />
-		<link rel="shortcut icon" href={{'assets/media/logos/favicon.ico'}} />
-		<link href={{"assets/plugins/custom/fullcalendar/fullcalendar.bundle.css"}} rel="stylesheet" type="text/css" />
-		<link href={{"assets/plugins/global/plugins.bundle.css"}} rel="stylesheet" type="text/css" />
-		<link href={{"assets/css/style.bundle.css"}} rel="stylesheet" type="text/css" />
+		<link rel="shortcut icon" href={{'/assets/media/logos/favicon.ico'}} />
+		<link href={{"/assets/plugins/custom/fullcalendar/fullcalendar.bundle.css"}} rel="stylesheet" type="text/css" />
+		<link href={{"/assets/plugins/global/plugins.bundle.css"}} rel="stylesheet" type="text/css" />
+		<link href={{"/assets/css/style.bundle.css"}} rel="stylesheet" type="text/css" />
 	</head>
 
     <body id="kt_body" class="bg-body">
 		<div class="d-flex flex-column flex-root">
-			<div class="d-flex flex-column flex-column-fluid bgi-position-y-bottom position-x-center bgi-no-repeat bgi-size-contain bgi-attachment-fixed" style="background-image: url(assets/media/illustrations/sigma-1/14.png">
+			<div class="d-flex flex-column flex-column-fluid bgi-position-y-bottom position-x-center bgi-no-repeat bgi-size-contain bgi-attachment-fixed" style="background-image: url('{{'/assets/media/illustrations/sigma-1/14.png'}}')">
 				<div class="d-flex flex-center flex-column flex-column-fluid p-10 pb-lg-20">
 					<div class="w-lg-500px bg-body rounded shadow-sm p-10 p-lg-15 mx-auto">
 						<form class="form w-100" novalidate="novalidate" id="kt_sign_in_form" action="user" method="POST">
@@ -58,8 +58,8 @@
 				</div>
 			</div>
 		</div>
-		<script src="assets/plugins/global/plugins.bundle.js"></script>
-		<script src="assets/js/scripts.bundle.js"></script>
-		<script src="assets/js/custom/authentication/sign-in/general.js"></script>
+		<script src="{{'/assets/plugins/global/plugins.bundle.js'}}"></script>
+		<script src="{{'/assets/js/scripts.bundle.js'}}"></script>
+		<script src="{{'/assets/js/custom/authentication/sign-in/general.js'}}"></script>
 	</body>
 </html>

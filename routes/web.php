@@ -25,6 +25,7 @@ Route::resource('/orca/login', LoginController::class);
 // End User Controller
 
 // Main Controller
-Route::GET('/orca/useraccount', [UserController::class, 'useraccount']);
+Route::resource('/orca/useraccount', UserController::class);
+Route::GET('/orca/user/useraccount', [UserController::class, 'useraccount']);
 Route::resource('/orca/main', MainController::class);
 // End Main Controller
