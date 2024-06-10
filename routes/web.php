@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\MainController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -20,10 +21,10 @@ use Illuminate\Support\Facades\Route;
 // });
 
 // User Controller
-Route::resource('user', LoginController::class);
-Route::GET('/orca/users/useraccount', [LoginController::class, 'useraccount']);
+Route::resource('/orca/login', LoginController::class);
 // End User Controller
 
 // Main Controller
-Route::resource('dashboard', MainController::class);
+Route::GET('/orca/useraccount', [UserController::class, 'useraccount']);
+Route::resource('/orca/main', MainController::class);
 // End Main Controller
