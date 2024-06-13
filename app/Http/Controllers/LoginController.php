@@ -21,11 +21,13 @@ class LoginController extends Controller
     protected $title;
     protected $menucategories, $menu, $submenu, $level, $role;
 
-    protected function debuging($parameter) {
+    protected function debuging($parameter)
+    {
         dd($parameter);
     }
 
-    protected function loginactivity() {
+    protected function loginactivity()
+    {
         if (Auth::user()) {
             dd('ok');
         } else {
@@ -119,7 +121,7 @@ class LoginController extends Controller
         if (Auth::user()) {
             $this->rolelevel();
             $this->loadmenu();
-    
+
             return view('useraccount.create', array(
                 'title' => 'User Account',
                 'menucategories' => $this->menucategories,
@@ -171,34 +173,7 @@ class LoginController extends Controller
      */
     public function show($id)
     {
-
-        if (Auth::user()) {
-        $this->loadmenu();
-        // decrypt process
-        $dyc = Crypt::decryptString($id);
-        $dyc = explode(':', $dyc);
-        $dyc = $dyc[2];
-        $dyc = substr($dyc, 1, -2);
-        $dyc = explode('_', $dyc);
-        // end decrypt process
-
-        $user = User::where(array(
-            'id' => "$dyc[0]",
-            'karyawan_id' => "$dyc[1]"
-        ))->get();
-
-        return view('useraccount.view', [
-            'title' => 'User Account',
-            'menucategories' => $this->menucategories,
-            'menu' => $this->menu,
-            'submenu' => $this->submenu,
-            'data' => array(
-                'user' => $user
-            )
-        ]);
-        } else {
-            return redirect('orca/login');
-        }
+        
     }
 
     /**

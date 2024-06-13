@@ -1931,7 +1931,8 @@
                                                 <span class="badge badge-light-primary fw-bolder px-4 py-3">{{$user->role->role}}</span>
                                             </td>
                                             <td class="text-end">
-                                                <a href="/user/{{Crypt::encrypt($user->id.'_'.$user->karyawan_id)}}" class="btn btn-light btn-sm">View</a>
+                                                {{-- <a href="/orca/useraccount/{{Crypt::encrypt($user->id.'_'.$user->karyawan_id)}}" class="btn btn-light btn-sm">View</a> --}}
+                                                <a href="/orca/useraccount/{{Crypt::encrypt($user->id.'_'.$user->karyawan_id)}}" class="btn btn-light btn-sm">View</a>
                                             </td>
                                         </tr>
                                     @endforeach
