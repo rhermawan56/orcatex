@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Menu;
+use App\Models\Menutransaction;
+use App\Models\Submenu;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -17,8 +20,12 @@ class UserController extends Controller
      */
 
     protected $title;
-    protected $menucategories, $menu, $submenu, $level, $role;
+    protected $menucategories, $menu, $submenu, $level, $role, $url, $patern = 'orca';
 
+    public function __construct()
+    {
+        $this->url = url()->current();
+    }
 
     protected function debuging($parameter)
     {
@@ -78,6 +85,19 @@ class UserController extends Controller
             $this->rolelevel();
             $this->loadmenu();
 
+            $path = explode('/',$this->url);
+            $path_index = array_search($this->patern, $path);
+            $path_index += 1;
+            $path = $path[$path_index];
+
+            $rulemenu = Submenu::where('path','=',"$path")->first();
+            
+            $rulemenutransaction = Menutransaction::where(array(
+                'user_id' => Auth::user()->id,
+                'menu_id' => $rulemenu->menu_id,
+                'submenu_id' => $rulemenu->id
+            ))->first();
+
             switch ($this->role) {
                 case 'IT':
                     $user = User::all();
@@ -94,7 +114,9 @@ class UserController extends Controller
                 'menu' => $this->menu,
                 'submenu' => $this->submenu,
                 'data' => array(
-                    'user' => $user
+                    'user' => $user,
+                    'rulemenu' => $rulemenu,
+                    'rulemenutransaction' => $rulemenutransaction
                 )
             ));
         } else {
@@ -128,10 +150,16 @@ class UserController extends Controller
      *
      * @param  \App\Models\User  $user
      * @return \Illuminate\Http\Response
-     */
+    */
+
     public function show($user)
     {
-        if (Auth::user()) {
+        if (Auth::user()) {        
+            $path = explode('/',$this->url);
+            $path_index = array_search($this->patern, $path);
+            $path_index += 1;
+            $path = $path[$path_index];
+
             $this->loadmenu();
             // decrypt process
             $dyc = Crypt::decryptString($user);
@@ -140,6 +168,14 @@ class UserController extends Controller
             $dyc = substr($dyc, 1, -2);
             $dyc = explode('_', $dyc);
             // end decrypt process
+
+            $rulemenu = Submenu::where('path','=',"$path")->first();
+            
+            $rulemenutransaction = Menutransaction::where(array(
+                'user_id' => Auth::user()->id,
+                'menu_id' => $rulemenu->menu_id,
+                'submenu_id' => $rulemenu->id
+            ))->first();
 
             $user = User::where(array(
                 'id' => "$dyc[0]",
@@ -152,7 +188,9 @@ class UserController extends Controller
                 'menu' => $this->menu,
                 'submenu' => $this->submenu,
                 'data' => array(
-                    'user' => $user
+                    'user' => $user,
+                    'rulemenu' => $rulemenu,
+                    'rulemenutransaction' => $rulemenutransaction
                 )
             ]);
         } else {

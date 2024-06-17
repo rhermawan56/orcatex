@@ -118,7 +118,7 @@
                         <ul class="nav nav-stretch nav-line-tabs nav-line-tabs-2x border-transparent fs-5 fw-bolder flex-nowrap" id="nav-content">
                             <li class="nav-item">
                                 <a class="nav-link text-active-primary me-6"
-                                    href="{{ '/orca/users/useraccount' }}">Overview</a>
+                                    href="{{$data['rulemenu']->link}}">Overview</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link text-active-primary me-6" href="">Create User</a>
@@ -129,6 +129,16 @@
                             <li class="nav-item">
                                 <a class="nav-link text-active-primary me-6" href="">Biodata</a>
                             </li>
+                            @if ($data['rulemenutransaction']->modify == 'Y')
+                            <li class="nav-item">
+                                <a class="nav-link text-active-primary me-6" href="">Modify</a>
+                            </li>
+                            @endif
+                            @if ($data['rulemenutransaction']->delete == 'Y')
+                            <li class="nav-item">
+                                <a class="nav-link text-active-primary me-6" href="">Delete</a>
+                            </li>
+                            @endif
                         </ul>
                         <!--end::Nav links-->
                     </div>

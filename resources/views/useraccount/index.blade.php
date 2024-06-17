@@ -119,12 +119,14 @@
                             class="nav nav-stretch nav-line-tabs nav-line-tabs-2x border-transparent fs-5 fw-bolder flex-nowrap">
                             <li class="nav-item">
                                 <a class="nav-link text-active-primary me-6 active"
-                                    href="{{ '/orca/users/useraccount' }}">Overview</a>
+                                    href="{{$data['rulemenu']->link}}">Overview</a>
                             </li>
-                            <li class="nav-item">
-                                <a class="nav-link text-active-primary me-6"
-                                    href="{{ '/user/create' }}">Create User</a>
-                            </li>
+                            @if ($data['rulemenutransaction']->create == 'Y')
+                                <li class="nav-item">
+                                    <a class="nav-link text-active-primary me-6"
+                                        href="{{$data['rulemenu']->link.'/create'}}">Create User</a>
+                                </li>
+                            @endif
                         </ul>
                         <!--end::Nav links-->
                     </div>
