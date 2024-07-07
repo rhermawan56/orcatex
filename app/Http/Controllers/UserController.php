@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Karyawan;
 use App\Models\Menu;
 use App\Models\Menutransaction;
 use App\Models\Submenu;
@@ -79,6 +80,16 @@ class UserController extends Controller
         }
     }
 
+    protected function rulemenutransaction($rulemenu) {
+        $rulemenutransaction = Menutransaction::where(array(
+            'user_id' => Auth::user()->id,
+            'menu_id' => $rulemenu->menu_id,
+            'submenu_id' => $rulemenu->id
+        ))->first();
+
+        return $rulemenutransaction;
+    }
+
     public function index()
     {
         if (Auth::user()) {
@@ -91,12 +102,6 @@ class UserController extends Controller
             $path = $path[$path_index];
 
             $rulemenu = Submenu::where('path','=',"$path")->first();
-            
-            $rulemenutransaction = Menutransaction::where(array(
-                'user_id' => Auth::user()->id,
-                'menu_id' => $rulemenu->menu_id,
-                'submenu_id' => $rulemenu->id
-            ))->first();
 
             switch ($this->role) {
                 case 'IT':
@@ -116,7 +121,7 @@ class UserController extends Controller
                 'data' => array(
                     'user' => $user,
                     'rulemenu' => $rulemenu,
-                    'rulemenutransaction' => $rulemenutransaction
+                    'rulemenutransaction' => $this->rulemenutransaction($rulemenu)
                 )
             ));
         } else {
@@ -131,7 +136,42 @@ class UserController extends Controller
      */
     public function create()
     {
-        //
+        if (Auth::user()) {
+            $this->rolelevel();
+            $this->loadmenu();
+
+            $path = explode('/',$this->url);
+            $path_index = array_search($this->patern, $path);
+            $path_index += 1;
+            $path = $path[$path_index];
+
+            $rulemenu = Submenu::where('path','=',"$path")->first();
+
+            switch ($this->role) {
+                case 'IT':
+                    $user = User::all();
+                    break;
+
+                default:
+                    $user = User::where('role_id', '=', Auth::user()->role_id)->get();
+                    break;
+            }
+
+            return view('useraccount.create', array(
+                'title' => 'User Account',
+                'menucategories' => $this->menucategories,
+                'menu' => $this->menu,
+                'submenu' => $this->submenu,
+                'data' => array(
+                    'user' => $user,
+                    'rulemenu' => $rulemenu,
+                    'rulemenutransaction' => $this->rulemenutransaction($rulemenu),
+                    'employees' => Karyawan::all(),
+                )
+            ));
+        } else {
+            return redirect('orca/login');
+        }
     }
 
     /**

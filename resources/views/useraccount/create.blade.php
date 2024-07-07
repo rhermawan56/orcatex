@@ -120,9 +120,12 @@
                                 <a class="nav-link text-active-primary me-6"
                                     href="{{ '/orca/users/useraccount' }}">Overview</a>
                             </li>
-                            <li class="nav-item">
-                                <a class="nav-link text-active-primary me-6 active" href="">Create User</a>
-                            </li>
+
+                            @if ($data['rulemenutransaction']->create == 'Y')
+                                <li class="nav-item">
+                                    <a class="nav-link text-active-primary me-6 active" href="">Create User</a>
+                                </li>
+                            @endif
                         </ul>
                         <!--end::Nav links-->
                     </div>

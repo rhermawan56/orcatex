@@ -124,7 +124,7 @@
                             @if ($data['rulemenutransaction']->create == 'Y')
                                 <li class="nav-item">
                                     <a class="nav-link text-active-primary me-6"
-                                        href="{{$data['rulemenu']->link.'/create'}}">Create User</a>
+                                        href="{{$data['rulemenu']->link.'/create'}}">Create</a>
                                 </li>
                             @endif
                         </ul>
